@@ -1,0 +1,72 @@
+import pygame
+from random import *
+# from Tkinter import *
+
+blue = (113, 177, 227)  # valeur max =255.
+white = (255, 255, 255)
+
+pygame.init()
+
+surfaceW = 800
+surfaceH = 500
+ballonW = 50
+ballonH = 66
+nuageW = 300
+nuageH = 300
+
+surface = pygame.display.set_mode((surfaceW, surfaceH))
+pygame.display.set_caption("Ballon Volant")
+img = pygame.image.load('pizzayolo.png.png')
+
+def personnage(x, y, image):
+    surface.blit(image, (x, y))
+
+
+def main():
+    x = 150
+    y = 200
+    x_move = 0
+    vel = 10
+    game_over = False
+    isJump = False
+    jumpCount = 10
+
+    while not game_over:
+        pygame.time.delay(10)
+        #permet de ralentir le jeu
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                game_over = True
+
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_LEFT]:
+            x -= vel
+        if keys[pygame.K_RIGHT]:
+            x += vel
+        if not(isJump):
+            if keys[pygame.K_UP]:
+                y -= vel
+            if keys[pygame.K_DOWN]:
+                y += vel
+            if keys[pygame.K_SPACE]:
+                isJump=True
+        else:
+            if jumpCount >= -10:
+                neg = 1
+                if jumpCount < 0:
+                    neg = -1
+                y -= (jumpCount ** 2) * 0.5 * neg
+                jumpCount -= 1
+            else:
+                isJump = False
+                jumpCount = 10
+
+        surface.fill(blue)
+        personnage(x, y, img)
+        pygame.display.update()
+
+
+main()
+pygame.quit()
+quit()
