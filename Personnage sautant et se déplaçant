@@ -9,10 +9,6 @@ pygame.init()
 
 surfaceW = 800
 surfaceH = 500
-ballonW = 50
-ballonH = 66
-nuageW = 300
-nuageH = 300
 
 surface = pygame.display.set_mode((surfaceW, surfaceH))
 pygame.display.set_caption("Ballon Volant")
@@ -25,7 +21,6 @@ def personnage(x, y, image):
 def main():
     x = 150
     y = 200
-    x_move = 0
     vel = 10
     game_over = False
     isJump = False
@@ -65,7 +60,6 @@ def main():
         surface.fill(blue)
         personnage(x, y, img)
         pygame.display.update()
-print ("yo")
 
 main()
 pygame.quit()
