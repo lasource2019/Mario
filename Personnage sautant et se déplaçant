@@ -16,7 +16,7 @@ nuageH = 300
 
 surface = pygame.display.set_mode((surfaceW, surfaceH))
 pygame.display.set_caption("Ballon Volant")
-img = pygame.image.load('pizzayolo.png.png')
+img = pygame.image.load('pizzayolo.png')
 
 def personnage(x, y, image):
     surface.blit(image, (x, y))
