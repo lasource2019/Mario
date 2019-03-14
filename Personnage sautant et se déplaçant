@@ -65,7 +65,7 @@ def main():
         surface.fill(blue)
         personnage(x, y, img)
         pygame.display.update()
-
+print ("yo")
 
 main()
 pygame.quit()
