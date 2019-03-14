@@ -2,7 +2,7 @@ import pygame
 from random import *
 # from Tkinter import *
 
-blue = (113, 177, 227)  # valeur max =255.
+blue = (113, 177, 227) 
 white = (255, 255, 255)
 
 pygame.init()
