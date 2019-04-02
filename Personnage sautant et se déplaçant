@@ -1,66 +1,114 @@
 import pygame
-from random import *
-# from Tkinter import *
 
-blue = (113, 177, 227) 
+walkRight = [pygame.image.load('Pizzayolo.png'), pygame.image.load('Walkingyolo1.png'),
+             pygame.image.load('Walkingyolo2.png'), pygame.image.load('Walkingyolo3.png'),
+             pygame.image.load('Walkingyolo4.png')]
+walkLeft = [pygame.image.load('Pizzayolo.png'), pygame.image.load('Walkingyolo1.png'),
+            pygame.image.load('Walkingyolo2.png'), pygame.image.load('Walkingyolo3.png'),
+            pygame.image.load('Walkingyolo4.png')]
+img = pygame.image.load('pizzayolo.png')
+blue = (113, 177, 227)
 white = (255, 255, 255)
 
+clock = pygame.time.Clock()
 pygame.init()
 
 surfaceW = 800
 surfaceH = 500
 
 surface = pygame.display.set_mode((surfaceW, surfaceH))
-pygame.display.set_caption("Ballon Volant")
-img = pygame.image.load('pizzayolo.png')
-
-def personnage(x, y, image):
-    surface.blit(image, (x, y))
+pygame.display.set_caption("JEU bastien Antoine Briac")
 
 
-def main():
-    x = 150
-    y = 200
-    vel = 10
-    game_over = False
-    isJump = False
-    jumpCount = 10
+class player(object):
+    def __init__(self, x, y, width, height):
+        self.x = x
+        self.y = y
+        self.height = height
+        self.width = width
+        self.vel = 5
+        self.isJump = False
+        self.jumpCount = 10
+        self.right = False
+        self.left = False
+        self.walkCount = 0
+        # variables assosciées au personnage
 
-    while not game_over:
-        pygame.time.delay(10)
-        #permet de ralentir le jeu
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                game_over = True
 
-        keys = pygame.key.get_pressed()
 
-        if keys[pygame.K_LEFT]:
-            x -= vel
-        if keys[pygame.K_RIGHT]:
-            x += vel
-        if not(isJump):
-            if keys[pygame.K_UP]:
-                y -= vel
-            if keys[pygame.K_DOWN]:
-                y += vel
-            if keys[pygame.K_SPACE]:
-                isJump=True
+# Définir la fenêtre de jeu et le personnage principal
+def personnage():
+    if pizzayolo.walkCount + 1 >= 5:
+        pizzayolo.walkCount = 0
+
+    if pizzayolo.left:
+        surface.blit(walkLeft[pizzayolo.walkCount], (pizzayolo.x, pizzayolo.y))
+        pizzayolo.walkCount += 1
+    elif pizzayolo.right:
+        surface.blit(walkRight[pizzayolo.walkCount], (pizzayolo.x, pizzayolo.y))
+        pizzayolo.walkCount += 1
+    else :
+        surface.blit(img, (pizzayolo.x, pizzayolo.y))
+        pizzayolo.walkCount = 0
+    pygame.display.update()
+
+
+
+
+
+# Moteur du jeu
+game_over = False
+pizzayolo = player(150, 200, 32,  32)
+while not game_over:
+    clock.tick(50)
+    # permet de ralentir le jeu
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            game_over = True
+
+    # Definir la gravité
+    gravity = 2
+    pizzayolo.y += gravity
+
+    # permet de prendre en compte l'utilisation des touches sur le clavier
+    keys = pygame.key.get_pressed()
+
+    # permet de faire bouger le personnage et l'empèche de sortir de l'écran
+    if keys[pygame.K_LEFT] and pizzayolo.x  > pizzayolo.vel:
+        pizzayolo.x -= pizzayolo.vel
+        pizzayolo.left = True
+        pizzayolo.right = False
+    elif keys[pygame.K_RIGHT] and pizzayolo.x  < 500 - pizzayolo.vel :
+        pizzayolo.x += pizzayolo.vel
+        pizzayolo.right = True
+        pizzayolo.left = False
+    else :
+        pizzayolo.right = False
+        pizzayolo.left = False
+        pizzayolo.walkCount = 0
+    if not (pizzayolo.isJump):
+
+            # permet au personnage de sauter
+
+        if keys[pygame.K_SPACE]:
+            pizzayolo.isJump = True
+            pizzayolo.right = True
+            pizzayolo.left = True
+            pizzayolo.walkCount = True
+    else:
+        if pizzayolo.jumpCount >= -10:
+            neg = 1
+            if pizzayolo.jumpCount < 0:
+                neg = -1
+            pizzayolo.y -= (pizzayolo.jumpCount ** 2) * 0.5 * neg
+            pizzayolo.jumpCount -= 1
         else:
-            if jumpCount >= -10:
-                neg = 1
-                if jumpCount < 0:
-                    neg = -1
-                y -= (jumpCount ** 2) * 0.5 * neg
-                jumpCount -= 1
-            else:
-                isJump = False
-                jumpCount = 10
+            pizzayolo.isJump = False
+            pizzayolo.jumpCount = 10
 
-        surface.fill(blue)
-        personnage(x, y, img)
-        pygame.display.update()
 
-main()
+    surface.fill(blue)
+    personnage()
+
 pygame.quit()
 quit()
