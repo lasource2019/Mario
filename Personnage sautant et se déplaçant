@@ -1,8 +1,8 @@
 import pygame
 
-walkRight = [pygame.image.load('Pizzayolo.png'), pygame.image.load('Walkingyolo1.png'),
-             pygame.image.load('Walkingyolo2.png'), pygame.image.load('Walkingyolo3.png'),
-             pygame.image.load('Walkingyolo4.png')]
+walkRight = [pygame.image.load('Reverseyolo.png'), pygame.image.load('Ralkingyolo1.png'),
+             pygame.image.load('Ralkingyolo2.png'), pygame.image.load('Ralkingyolo3.png'),
+             pygame.image.load('Ralkingyolo4.png')]
 walkLeft = [pygame.image.load('Pizzayolo.png'), pygame.image.load('Walkingyolo1.png'),
             pygame.image.load('Walkingyolo2.png'), pygame.image.load('Walkingyolo3.png'),
             pygame.image.load('Walkingyolo4.png')]
@@ -34,22 +34,25 @@ class player(object):
         self.walkCount = 0
         # variables assosciées au personnage
 
+    def mouvement(self, surface):
+        if pizzayolo.walkCount + 1 >= 25:
+            pizzayolo.walkCount = 0
+
+        if pizzayolo.left:
+            surface.blit(walkLeft[pizzayolo.walkCount // 5], (pizzayolo.x, pizzayolo.y))
+            pizzayolo.walkCount += 1
+        elif pizzayolo.right:
+            surface.blit(walkRight[pizzayolo.walkCount // 5], (pizzayolo.x, pizzayolo.y))
+            pizzayolo.walkCount += 1
+        else:
+            surface.blit(img, (pizzayolo.x, pizzayolo.y))
+            pizzayolo.walkCount = 0
+
 
 
 # Définir la fenêtre de jeu et le personnage principal
 def personnage():
-    if pizzayolo.walkCount + 1 >= 5:
-        pizzayolo.walkCount = 0
-
-    if pizzayolo.left:
-        surface.blit(walkLeft[pizzayolo.walkCount], (pizzayolo.x, pizzayolo.y))
-        pizzayolo.walkCount += 1
-    elif pizzayolo.right:
-        surface.blit(walkRight[pizzayolo.walkCount], (pizzayolo.x, pizzayolo.y))
-        pizzayolo.walkCount += 1
-    else :
-        surface.blit(img, (pizzayolo.x, pizzayolo.y))
-        pizzayolo.walkCount = 0
+    pizzayolo.mouvement(surface)
     pygame.display.update()
 
 
