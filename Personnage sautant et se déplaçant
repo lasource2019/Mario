@@ -81,7 +81,7 @@ while not game_over:
         pizzayolo.x -= pizzayolo.vel
         pizzayolo.left = True
         pizzayolo.right = False
-    elif keys[pygame.K_RIGHT] and pizzayolo.x  < 500 - pizzayolo.vel :
+    elif keys[pygame.K_RIGHT] and pizzayolo.x  < 700 - pizzayolo.vel :
         pizzayolo.x += pizzayolo.vel
         pizzayolo.right = True
         pizzayolo.left = False
