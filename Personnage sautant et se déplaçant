@@ -1,25 +1,35 @@
 import pygame
 
+# on importe les images pour notre peronnages principal
 walkRight = [pygame.image.load('Reverseyolo.png'), pygame.image.load('Ralkingyolo1.png'),
              pygame.image.load('Ralkingyolo2.png'), pygame.image.load('Ralkingyolo3.png'),
              pygame.image.load('Ralkingyolo4.png')]
+             # images pour l'animation de marche à droite 
 walkLeft = [pygame.image.load('Pizzayolo.png'), pygame.image.load('Walkingyolo1.png'),
             pygame.image.load('Walkingyolo2.png'), pygame.image.load('Walkingyolo3.png'),
             pygame.image.load('Walkingyolo4.png')]
+            # images pour l'animation de marche à gauche
+            
 img = pygame.image.load('pizzayolo.png')
+# image du personnage à l'arrêt
 blue = (113, 177, 227)
 white = (255, 255, 255)
 
 clock = pygame.time.Clock()
+# variable permettant de changer le temps
+
 pygame.init()
 
 surfaceW = 800
 surfaceH = 500
+# on definit la longeur et largeur de la fenêtre
 
 surface = pygame.display.set_mode((surfaceW, surfaceH))
+# on creer une fenêtre
+
 pygame.display.set_caption("JEU bastien Antoine Briac")
 
-
+# on rassemble toutes les variables associées aux caractèristiques du personnage
 class player(object):
     def __init__(self, x, y, width, height):
         self.x = x
@@ -47,14 +57,15 @@ class player(object):
         else:
             surface.blit(img, (pizzayolo.x, pizzayolo.y))
             pizzayolo.walkCount = 0
+        # on définit les mouvements du personnage et on appelle les images pour l'animation
 
 
 
-# Définir la fenêtre de jeu et le personnage principal
 def personnage():
     pizzayolo.mouvement(surface)
     pygame.display.update()
-
+    
+    # on ajoute le personnage au jeu
 
 
 
