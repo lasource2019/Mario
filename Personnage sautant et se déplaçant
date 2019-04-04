@@ -45,6 +45,7 @@ class player(object):
         # variables assosciées au personnage
 
     def mouvement(self, surface):
+        # on choisi le nombre d'images de l'animation à mettre par pas.  
         if pizzayolo.walkCount + 1 >= 25:
             pizzayolo.walkCount = 0
 
