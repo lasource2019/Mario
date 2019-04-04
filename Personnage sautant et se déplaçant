@@ -4,12 +4,12 @@ import pygame
 walkRight = [pygame.image.load('Reverseyolo.png'), pygame.image.load('Ralkingyolo1.png'),
              pygame.image.load('Ralkingyolo2.png'), pygame.image.load('Ralkingyolo3.png'),
              pygame.image.load('Ralkingyolo4.png')]
-             # images pour l'animation de marche à droite 
+# images pour l'animation de marche à droite
 walkLeft = [pygame.image.load('Pizzayolo.png'), pygame.image.load('Walkingyolo1.png'),
             pygame.image.load('Walkingyolo2.png'), pygame.image.load('Walkingyolo3.png'),
             pygame.image.load('Walkingyolo4.png')]
-            # images pour l'animation de marche à gauche
-            
+# images pour l'animation de marche à gauche
+
 img = pygame.image.load('pizzayolo.png')
 # image du personnage à l'arrêt
 blue = (113, 177, 227)
@@ -29,6 +29,7 @@ surface = pygame.display.set_mode((surfaceW, surfaceH))
 
 pygame.display.set_caption("JEU bastien Antoine Briac")
 
+
 # on rassemble toutes les variables associées aux caractèristiques du personnage
 class player(object):
     def __init__(self, x, y, width, height):
@@ -42,10 +43,11 @@ class player(object):
         self.right = False
         self.left = False
         self.walkCount = 0
+        self.hitbox = (self.x + 20, self.y + 10, 60, 90)
         # variables assosciées au personnage
 
     def mouvement(self, surface):
-        # on choisi le nombre d'images de l'animation à mettre par pas.  
+        # on choisi le nombre d'images de l'animation à mettre par pas.
         if pizzayolo.walkCount + 1 >= 25:
             pizzayolo.walkCount = 0
 
@@ -58,22 +60,34 @@ class player(object):
         else:
             surface.blit(img, (pizzayolo.x, pizzayolo.y))
             pizzayolo.walkCount = 0
+        self.hitbox = (self.x + 20, self.y + 10, 60, 90)
+        pygame.draw.rect(surface, white, self.hitbox, 2)
         # on définit les mouvements du personnage et on appelle les images pour l'animation
 
-
+class ennemie(object):
+    def __init__(self, x, y , height, width, end):
+        self.x = x
+        self.y = y
+        self.height = height
+        self.width = width
+        self.end = end
+        self.walkcount = 0
+        self.vel = 3
+        self.hitbox = (self.x + 20, self.y + 10, 60, 90)
+        pygame.draw.rect(surface, white, self.hitbox, 2)
+        #variables associées à l'ennemie
 
 def personnage():
     pizzayolo.mouvement(surface)
     pygame.display.update()
-    
+
     # on ajoute le personnage au jeu
-
-
 
 
 # Moteur du jeu
 game_over = False
-pizzayolo = player(150, 200, 32,  32)
+pizzayolo = player(150, 200, 32, 32)
+
 while not game_over:
     clock.tick(50)
     # permet de ralentir le jeu
@@ -82,28 +96,28 @@ while not game_over:
             game_over = True
 
     # Definir la gravité
-    gravity = 2
+    gravity = 0
     pizzayolo.y += gravity
 
     # permet de prendre en compte l'utilisation des touches sur le clavier
     keys = pygame.key.get_pressed()
 
     # permet de faire bouger le personnage et l'empèche de sortir de l'écran
-    if keys[pygame.K_LEFT] and pizzayolo.x  > pizzayolo.vel:
+    if keys[pygame.K_LEFT] and pizzayolo.x > pizzayolo.vel:
         pizzayolo.x -= pizzayolo.vel
         pizzayolo.left = True
         pizzayolo.right = False
-    elif keys[pygame.K_RIGHT] and pizzayolo.x  < 700 - pizzayolo.vel :
+    elif keys[pygame.K_RIGHT] and pizzayolo.x < 700 - pizzayolo.vel:
         pizzayolo.x += pizzayolo.vel
         pizzayolo.right = True
         pizzayolo.left = False
-    else :
+    else:
         pizzayolo.right = False
         pizzayolo.left = False
         pizzayolo.walkCount = 0
     if not (pizzayolo.isJump):
 
-            # permet au personnage de sauter
+        # permet au personnage de sauter
 
         if keys[pygame.K_SPACE]:
             pizzayolo.isJump = True
@@ -120,7 +134,6 @@ while not game_over:
         else:
             pizzayolo.isJump = False
             pizzayolo.jumpCount = 10
-
 
     surface.fill(blue)
     personnage()
