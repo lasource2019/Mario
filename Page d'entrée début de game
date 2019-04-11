@@ -1,0 +1,12 @@
+from tkinter import *
+
+#creer une premiere fenetre
+window = Tk()
+
+# personnaliser cette fenetre
+window.title("My application")
+window.geometry ("300x300")
+window.minsize(480, 360)
+
+# afficher
+window.mainloop()
