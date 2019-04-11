@@ -1,4 +1,4 @@
-from tkinter import *
+from tkinter import*
 
 #creer une premiere fenetre
 window = Tk()
@@ -7,6 +7,16 @@ window = Tk()
 window.title("My application")
 window.geometry ("300x300")
 window.minsize(480, 360)
+window.iconbitmap("Pizzayolo.ico")
+window.config(background='#F98870')
+
+#ajouter un premier texte
+label_title = Label(window, text="Bienvenue sur Pizzayolo", font=('Algerian',55), bg='#F98870', fg='white')
+label_title.pack(expand=YES)
+
+#ajouter un second texte
+label_subtitle = Label(window, text="CLiquez sur une touche pour jouer!!", font=('Algerian',30), bg='#F98870', fg='white')
+label_subtitle.pack(expand=YES)
 
 # afficher
 window.mainloop()
