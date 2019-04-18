@@ -14,7 +14,7 @@ walkLeft = [pygame.image.load('Pizzayolo.png'), pygame.image.load('Walkingyolo1.
 
 img = pygame.image.load('Pizzayolo.png')
 imgmechant = pygame.image.load('Mechantyolo.png')
-imgprincesse = pygame.image.load('Princesse4.png')
+imgprincesse = pygame.image.load('Princesse.png')
 # image du personnage à l'arrêt
 blue = (113, 177, 227)
 white = (255, 255, 255)
