@@ -1,5 +1,7 @@
 import pygame
 
+background = pygame.image.load('Background2.jpg')
+platformimg = pygame.image.load('platform.png')
 # on importe les images pour notre peronnages principal
 walkRight = [pygame.image.load('Reverseyolo.png'), pygame.image.load('Ralkingyolo1.png'),
              pygame.image.load('Ralkingyolo2.png'), pygame.image.load('Ralkingyolo3.png'),
@@ -10,7 +12,9 @@ walkLeft = [pygame.image.load('Pizzayolo.png'), pygame.image.load('Walkingyolo1.
             pygame.image.load('Walkingyolo4.png')]
 # images pour l'animation de marche à gauche
 
-img = pygame.image.load('pizzayolo.png')
+img = pygame.image.load('Pizzayolo.png')
+imgmechant = pygame.image.load('Mechantyolo.png')
+imgprincesse = pygame.image.load('Princesse4.png')
 # image du personnage à l'arrêt
 blue = (113, 177, 227)
 white = (255, 255, 255)
@@ -22,7 +26,7 @@ clock = pygame.time.Clock()
 pygame.init()
 
 surfaceW = 1300
-surfaceH = 1000
+surfaceH = 600
 # on definit la longeur et largeur de la fenêtre
 
 surface = pygame.display.set_mode((surfaceW, surfaceH))
@@ -45,10 +49,20 @@ class player(object):
         self.left = False
         self.walkCount = 0
         self.hitbox = (self.x + 20, self.y + 10, 60, 90)
-        # variables assosciées au personnage
+        # variables assosciées aux caractéristiques du personnage
 
     def mouvement(self, surface):
-        # on choisi le nombre d'images de l'animation à mettre par pas.
+        if keys [pygame.K_RIGHT]:
+            self.left = True
+            self.right = False
+        elif keys[pygame.K_LEFT]:
+            self.right = True
+            self.left = False
+        else:
+            self.right = False
+            self.left = False
+            self.walkCount = 0
+# on choisi le nombre d'images de l'animation à mettre par pas.
         if pizzayolo.walkCount + 1 >= 25:
             pizzayolo.walkCount = 0
 
@@ -63,7 +77,7 @@ class player(object):
             pizzayolo.walkCount = 0
         self.hitbox = (self.x + 20, self.y + 10, 60, 90)
         pygame.draw.rect(surface, white, self.hitbox, 2)
-        # on définit les mouvements du personnage et on appelle les images pour l'animation
+# on définit les mouvements du personnage et on appelle les images pour l'animation
 
 class ennemie(object):
     def __init__(self, x, y , height, width, end):
@@ -73,13 +87,40 @@ class ennemie(object):
         self.width = width
         self.end = end
         self.walkcount = 0
-        self.vel = 3
+        self.vel = 5
         self.hitbox = (self.x + 20, self.y + 10, 60, 90)
         pygame.draw.rect(surface, white, self.hitbox, 2)
-        #variables associées à l'ennemie
+#variables associées aux caractéristiques de l'ennemi
+
     def bouger (self, surface):
+        if keys[pygame.K_RIGHT]:
+            self.x -= self.vel
+        elif keys[pygame.K_LEFT]:
+            self.x += self.vel
         self.hitbox = (self.x + 20, self.y + 10, 60, 90)
         pygame.draw.rect(surface, white, self.hitbox, 2)
+        surface.blit(imgmechant, (self.x, self.y))
+
+class princesse(object):
+    def __init__(self, x, y , height, width):
+        self.x = x
+        self.y = y
+        self.height = height
+        self.width = width
+        self.vel = 5
+        self.hitbox = (self.x, self.y, 120, 120)
+        pygame.draw.rect(surface, white, self.hitbox, 2)
+#variables associées aux caractéristiques de l'ennemi
+
+    def existe(self, surface):
+        if keys[pygame.K_RIGHT]:
+            self.x -= self.vel
+        elif keys[pygame.K_LEFT]:
+            self.x += self.vel
+        self.hitbox = (self.x, self.y + 10, 120, 120)
+        surface.blit(imgprincesse, (self.x, self.y))
+        pygame.draw.rect(surface, white, self.hitbox, 2)
+
 
 
 class platform(object):
@@ -88,63 +129,63 @@ class platform(object):
         self.y = y
         self.height = height
         self.width = width
+        self.vel = 5
         self.hitbox = (self.x, self.y, 300, 10)
 
     def existance(self, surface):
+# permet de faire bouger le personnage et l'empèche de sortir de l'écran
+        if keys[pygame.K_RIGHT]:
+            self.x -= self.vel
+        elif keys[pygame.K_LEFT]:
+            self.x += self.vel
         self.hitbox = (self.x, self.y, 300, 10)
         pygame.draw.rect(surface, red, self.hitbox, 2)
+        surface.blit(platformimg, (self.x, self.y))
 
 def personnage():
     pizzayolo.mouvement(surface)
     pizzaforme.existance(surface)
     plateyolo.existance(surface)
     pelateforme.existance(surface)
-    mechantyolo.bouger(surface)
+    plapla.existance(surface)
+    reineforme.existance(surface)
+    mechantyolo1.bouger(surface)
+    mechantyolo2.bouger(surface)
+    pizzareine.existe(surface)
     pygame.display.update()
 
-    # on ajoute le personnage au jeu
+# on ajoute le personnage au jeu
 
 
 # Moteur du jeu
 game_over = False
 pizzayolo = player(150, 200, 32, 32)
-mechantyolo = ennemie(100, 150, 32, 32, 2)
+mechantyolo1 = ennemie(100, 300, 32, 32, 2)
+mechantyolo2 = ennemie(500, 150, 32, 32, 2)
 pizzaforme = platform(50, 400, 10, 300)
 plateyolo = platform(450, 250, 10, 300)
 pelateforme = platform(800, 500, 10, 300)
+plapla = platform(1300, 400, 10, 300)
+reineforme = platform(1500, 500, 10, 300)
+pizzareine = princesse(1700, 350, 32, 32)
 
 
 while not game_over:
     clock.tick(50)
-    # permet de ralentir le jeu
+# permet de ralentir le jeu
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             game_over = True
 
-    # Definir la gravité
+# Definir la gravité
     gravity = 10
     pizzayolo.y += gravity
-    mechantyolo.y += gravity
-
-    # permet de prendre en compte l'utilisation des touches sur le clavier
+# permet de prendre en compte l'utilisation des touches sur le clavier
     keys = pygame.key.get_pressed()
 
-    # permet de faire bouger le personnage et l'empèche de sortir de l'écran
-    if keys[pygame.K_LEFT] and pizzayolo.x > pizzayolo.vel:
-        pizzayolo.x -= pizzayolo.vel
-        pizzayolo.left = True
-        pizzayolo.right = False
-    elif keys[pygame.K_RIGHT] and pizzayolo.x < 1080 - pizzayolo.vel:
-        pizzayolo.x += pizzayolo.vel
-        pizzayolo.right = True
-        pizzayolo.left = False
-    else:
-        pizzayolo.right = False
-        pizzayolo.left = False
-        pizzayolo.walkCount = 0
     if not (pizzayolo.isJump):
 
-        # permet au personnage de sauter
+# permet au personnage de sauter
 
         if keys[pygame.K_SPACE]:
             pizzayolo.isJump = True
@@ -162,17 +203,35 @@ while not game_over:
             pizzayolo.isJump = False
             pizzayolo.jumpCount = 12
 
-    #on va essyer de faire fonctionner les hitbox ok
-    if (pizzayolo.y > pizzaforme.y-100) and (pizzayolo.x > pizzaforme.x-85) and (pizzayolo.x < pizzaforme.x+280):
+#on va essyer de faire fonctionner les hitbox ok
+    if (pizzaforme.y-10 >= pizzayolo.y >= pizzaforme.y-100) and (pizzaforme.x+280 >= pizzayolo.x >= pizzaforme.x-85):
         pizzayolo.y = pizzaforme.y-100
-        mechantyolo.y = pizzaforme.y-100
-    if (pizzayolo.y > plateyolo.y-100) and (pizzayolo.x > plateyolo.x-85) and (pizzayolo.x < plateyolo.x+280):
+    if (plateyolo.y-10 > pizzayolo.y > plateyolo.y-100) and (plateyolo.x+280 >= pizzayolo.x >= plateyolo.x-85):
         pizzayolo.y = plateyolo.y-100
-        mechantyolo.y = plateyolo.y-100
-    if (pizzayolo.y > pelateforme.y-100) and (pizzayolo.x > pelateforme.x-85) and (pizzayolo.x < pelateforme.x+280):
+    if (pelateforme.y-10 > pizzayolo.y > pelateforme.y-100) and (pelateforme.x+280 >= pizzayolo.x >= pelateforme.x-85):
         pizzayolo.y = pelateforme.y-100
-        mechantyolo.y = pelateforme.y-100
-    surface.fill(blue)
+    if (plapla.y-10 >= pizzayolo.y >= plapla.y-100) and (plapla.x+280 >= pizzayolo.x >= plapla.x-85):
+        pizzayolo.y = plapla.y-100
+    if (reineforme.y-10 >= pizzayolo.y >= reineforme.y-100) and (reineforme.x+280 >= pizzayolo.x >= reineforme.x-85):
+        pizzayolo.y = reineforme.y-100
+
+    if pizzayolo.y >= 700:
+        game_over = True
+
+#on fait marcher les hitbox ennemies
+    if pizzayolo.hitbox == mechantyolo1.hitbox:
+        game_over = True
+    if pizzayolo.hitbox == mechantyolo2.hitbox:
+        game_over = True
+#platform mobile verticalement
+    pelateforme.y -=5
+    if pelateforme.y == 0:
+        pelateforme.y = 700
+#plateform piège
+    if (plapla.y - 10 >= pizzayolo.y >= plapla.y - 100) and (plapla.x + 280 >= pizzayolo.x >= plapla.x - 85):
+        plapla.y += 40
+
+    surface.blit(background, (0, 0))
     personnage()
 
 pygame.quit()
