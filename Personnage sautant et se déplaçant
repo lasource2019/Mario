@@ -21,19 +21,19 @@ blue = (113, 177, 227)
 white = (255, 255, 255)
 red = (227, 10, 150)
 
-clock = pygame.time.Clock()
 # variable permettant de changer le temps
+clock = pygame.time.Clock()
 
 pygame.init()
 
+# on definit la police des messages qui s'affichent dans le jeu et la longeur et largeur de la fenêtre 
 font = pygame.font.Font(None, 100)
 
 surfaceW = 1275
 surfaceH = 600
-# on definit la longeur et largeur de la fenêtre
 
-surface = pygame.display.set_mode((surfaceW, surfaceH))
 # on creer une fenêtre
+surface = pygame.display.set_mode((surfaceW, surfaceH))
 
 pygame.display.set_caption("JEU bastien Antoine Briac")
 
