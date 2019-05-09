@@ -251,9 +251,27 @@ while not game_over:
         pizzayolo.y = plateforme9.y-100
 
     if pizzayolo.y >= 700:
-        game_over = True
+        message('Perdu', red)
+        time.sleep(2)
+        pizzayolo = player(150, 200, 32, 32)
+        mechantyolo1 = ennemie(100, 300, 32, 32, 2)
+        mechantyolo2 = ennemie(500, 150, 32, 32, 2)
+        mechantyolo3 = ennemie(1350, 300, 32, 32, 2)
+        mechantyolo4 = ennemie(1550, 400, 32, 32, 2)
+        mechantyolo5 = ennemie(2240, 100, 32, 32, 2)
+        mechantyolo6 = ennemie(2450, 0, 32, 32, 2)
+        plateforme1 = platform(50, 400, 10, 300)
+        plateforme2 = platform(450, 250, 10, 300)
+        plateforme3 = platform(800, 500, 10, 300)
+        plateforme4 = platform(1300, 400, 10, 300)
+        plateforme5 = platform(1500, 500, 10, 300)
+        plateforme6 = platform(1700, 300, 10, 300)
+        plateforme7 = platform(2000, 300, 10, 300)
+        plateforme8 = platform(2200, 200, 10, 300)
+        plateforme9 = platform(2400, 100, 10, 300)
+        pizzareine = princesse(1700, 350, 32, 32)
 
-#on fait marcher les hitbox ennemies
+    #on fait marcher les hitbox ennemies
     if pizzayolo.hitbox == mechantyolo1.hitbox:
         game_over = True
     if pizzayolo.hitbox == mechantyolo2.hitbox:
@@ -273,12 +291,13 @@ while not game_over:
 #plateform piège
     if (plateforme4.y - 10 >= pizzayolo.y >= plateforme4.y - 100) and (plateforme4.x + 280 >= pizzayolo.x >= plateforme4.x - 85):
         plateforme4.y += 40
+# Faire marcher la reine
 
 
 
     surface.blit(background, (0, 0))
     personnage()
-message('tes niquez zebi', red)
+message('Merci', red)
 time.sleep(2)
 pygame.quit()
 quit()
