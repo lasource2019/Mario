@@ -194,7 +194,7 @@ plateforme6 = platform(1700, 300, 10, 300)
 plateforme7 = platform(2000, 300, 10, 300)
 plateforme8 = platform(2200, 200, 10, 300)
 plateforme9 = platform(2400, 100, 10, 300)
-pizzareine = princesse(1700, 350, 32, 32)
+pizzareine = princesse(2700, 100, 32, 32)
 
 
 while not game_over:
@@ -269,7 +269,7 @@ while not game_over:
         plateforme7 = platform(2000, 300, 10, 300)
         plateforme8 = platform(2200, 200, 10, 300)
         plateforme9 = platform(2400, 100, 10, 300)
-        pizzareine = princesse(1700, 350, 32, 32)
+        pizzareine = princesse(2700, 100, 32, 32)
 
     #on fait marcher les hitbox ennemies
     if pizzayolo.hitbox == mechantyolo1.hitbox:
@@ -292,10 +292,13 @@ while not game_over:
     if (plateforme4.y - 10 >= pizzayolo.y >= plateforme4.y - 100) and (plateforme4.x + 280 >= pizzayolo.x >= plateforme4.x - 85):
         plateforme4.y += 40
 # Faire marcher la reine
+    if (pizzareine.y-10 >= pizzayolo.y >= pizzareine.y-100) and (pizzareine.x+280 >= pizzayolo.x >= pizzareine.x-85):
+        message('bravo', red)
+        time.sleep(2)
+        game_over = True
 
 
-
-    surface.blit(background, (0, 0))
+    surface.fill(blue)
     personnage()
 message('Merci', red)
 time.sleep(2)
