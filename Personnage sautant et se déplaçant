@@ -163,12 +163,23 @@ def personnage():
     plateforme7.existance(surface)
     plateforme8.existance(surface)
     plateforme9.existance(surface)
+    plateforme10.existance(surface)
+    plateforme11.existance(surface)
+    plateforme12.existance(surface)
+    plateforme13.existance(surface)
+    plateforme14.existance(surface)
+    plateforme15.existance(surface)
+    plateforme16.existance(surface)
     mechantyolo1.bouger(surface)
     mechantyolo2.bouger(surface)
     mechantyolo3.bouger(surface)
     mechantyolo4.bouger(surface)
     mechantyolo5.bouger(surface)
     mechantyolo6.bouger(surface)
+    mechantyolo7.bouger(surface)
+    mechantyolo8.bouger(surface)
+    mechantyolo9.bouger(surface)
+    mechantyolo10.bouger(surface)
     pizzareine.existe(surface)
     pygame.display.update()
 
@@ -184,6 +195,12 @@ mechantyolo3 = ennemie(1350, 300, 32, 32)
 mechantyolo4 = ennemie(1550, 400, 32, 32)
 mechantyolo5 = ennemie(2450, 0, 32, 32)
 mechantyolo6 = ennemie(3100, 300, 32, 32)
+mechantyolo7 = ennemie(4100, 280, 32, 32)
+mechantyolo8 = ennemie(4650, 400, 32, 32)
+mechantyolo9 = ennemie(5400, 150, 32, 32)
+mechantyolo10 = ennemie(6650, 350, 32, 32)
+mechantyolo11 = ennemie(3100, 300, 32, 32)
+
 plateforme1 = platform(50, 400, 10, 300)
 plateforme2 = platform(450, 250, 10, 300)
 plateforme3 = platform(800, 500, 10, 300)
@@ -193,7 +210,14 @@ plateforme6 = platform(1700, 300, 10, 300)
 plateforme7 = platform(2000, 300, 10, 300)
 plateforme8 = platform(2400, 100, 10, 300)
 plateforme9 = platform(3000, 400, 10, 300)
-pizzareine = princesse(5000, 400, 32, 32)
+plateforme10 = platform(3550, 530, 10, 300)
+plateforme11 = platform(4050, 380, 10, 300)
+plateforme12 = platform(4550, 500, 10, 300)
+plateforme13 = platform(4750, 300, 10, 300)
+plateforme14 = platform(5300, 240, 10, 300)
+plateforme15 = platform(5800, 500, 10, 300)
+plateforme16 = platform(6600, 450, 10, 300)
+pizzareine = princesse(7000, 400, 32, 32)
 
 
 while not game_over:
@@ -249,6 +273,20 @@ while not game_over:
         pizzayolo.y = plateforme8.y-100
     if (plateforme9.y-10 >= pizzayolo.y >= plateforme9.y-100) and (plateforme9.x+280 >= pizzayolo.x >= plateforme9.x-85):
         pizzayolo.y = plateforme9.y-100
+    if (plateforme10.y-10 >= pizzayolo.y >= plateforme10.y-100) and (plateforme10.x+280 >= pizzayolo.x >= plateforme10.x-85):
+        pizzayolo.y = plateforme10.y-100
+    if (plateforme11.y-10 >= pizzayolo.y >= plateforme11.y-100) and (plateforme11.x+280 >= pizzayolo.x >= plateforme11.x-85):
+        pizzayolo.y = plateforme11.y-100
+    if (plateforme12.y-10 >= pizzayolo.y >= plateforme12.y-100) and (plateforme12.x+280 >= pizzayolo.x >= plateforme12.x-85):
+        pizzayolo.y = plateforme12.y-100
+    if (plateforme13.y-10 >= pizzayolo.y >= plateforme13.y-100) and (plateforme13.x+280 >= pizzayolo.x >= plateforme13.x-85):
+        pizzayolo.y = plateforme13.y-100
+    if (plateforme14.y-10 >= pizzayolo.y >= plateforme14.y-100) and (plateforme14.x+280 >= pizzayolo.x >= plateforme14.x-85):
+        pizzayolo.y = plateforme14.y-100
+    if (plateforme15.y-10 >= pizzayolo.y >= plateforme15.y-100) and (plateforme15.x+280 >= pizzayolo.x >= plateforme15.x-85):
+        pizzayolo.y = plateforme15.y-100
+    if (plateforme16.y-10 >= pizzayolo.y >= plateforme16.y-100) and (plateforme16.x+280 >= pizzayolo.x >= plateforme16.x-85):
+        pizzayolo.y = plateforme16.y-100
 
     if pizzayolo.y >= 700:
         message('Perdu', red)
@@ -258,8 +296,13 @@ while not game_over:
         mechantyolo2 = ennemie(500, 150, 32, 32)
         mechantyolo3 = ennemie(1350, 300, 32, 32)
         mechantyolo4 = ennemie(1550, 400, 32, 32)
-        mechantyolo5 = ennemie(2240, 100, 32, 32)
-        mechantyolo6 = ennemie(2450, 0, 32, 32)
+        mechantyolo5 = ennemie(2450, 0, 32, 32)
+        mechantyolo6 = ennemie(3100, 300, 32, 32)
+        mechantyolo7 = ennemie(4100, 280, 32, 32)
+        mechantyolo8 = ennemie(4650, 400, 32, 32)
+        mechantyolo9 = ennemie(5400, 150, 32, 32)
+        mechantyolo10 = ennemie(6650, 350, 32, 32)
+        mechantyolo11 = ennemie(3100, 300, 32, 32)
         plateforme1 = platform(50, 400, 10, 300)
         plateforme2 = platform(450, 250, 10, 300)
         plateforme3 = platform(800, 500, 10, 300)
@@ -267,30 +310,52 @@ while not game_over:
         plateforme5 = platform(1500, 500, 10, 300)
         plateforme6 = platform(1700, 300, 10, 300)
         plateforme7 = platform(2000, 300, 10, 300)
-        plateforme8 = platform(2200, 200, 10, 300)
-        plateforme9 = platform(2400, 100, 10, 300)
-        pizzareine = princesse(2700, 100, 32, 32)
-
+        plateforme8 = platform(2400, 100, 10, 300)
+        plateforme9 = platform(3000, 400, 10, 300)
+        plateforme10 = platform(3550, 530, 10, 300)
+        plateforme11 = platform(4050, 380, 10, 300)
+        plateforme12 = platform(4550, 500, 10, 300)
+        plateforme13 = platform(4750, 300, 10, 300)
+        plateforme14 = platform(5300, 240, 10, 300)
+        plateforme15 = platform(5800, 500, 10, 300)
+        plateforme16 = platform(6600, 450, 10, 300)
+        pizzareine = princesse(7000, 400, 32, 32)
     #on fait marcher les hitbox ennemies
     if (mechantyolo1.y >= pizzayolo.y >= mechantyolo1.y-100) and (mechantyolo1.x+50 >= pizzayolo.x >= mechantyolo1.x-25):
         game_over = True
     if (mechantyolo2.y >= pizzayolo.y >= mechantyolo2.y-100) and (mechantyolo2.x+50 >= pizzayolo.x >= mechantyolo2.x-25):
         game_over = True
-    if pizzayolo.hitbox == mechantyolo3.hitbox:
+    if (mechantyolo3.y >= pizzayolo.y >= mechantyolo3.y-100) and (mechantyolo3.x+50 >= pizzayolo.x >= mechantyolo3.x-25):
         game_over = True
-    if pizzayolo.hitbox == mechantyolo4.hitbox:
+    if (mechantyolo4.y >= pizzayolo.y >= mechantyolo4.y-100) and (mechantyolo4.x+50 >= pizzayolo.x >= mechantyolo4.x-25):
         game_over = True
-    if pizzayolo.hitbox == mechantyolo5.hitbox:
+    if (mechantyolo5.y >= pizzayolo.y >= mechantyolo5.y-100) and (mechantyolo5.x+50 >= pizzayolo.x >= mechantyolo5.x-25):
         game_over = True
-    if pizzayolo.hitbox == mechantyolo6.hitbox:
+    if (mechantyolo6.y >= pizzayolo.y >= mechantyolo6.y-100) and (mechantyolo6.x+50 >= pizzayolo.x >= mechantyolo6.x-25):
         game_over = True
-#platform mobile verticalement
+    if (mechantyolo7.y >= pizzayolo.y >= mechantyolo7.y-100) and (mechantyolo7.x+50 >= pizzayolo.x >= mechantyolo7.x-25):
+        game_over = True
+    if (mechantyolo8.y >= pizzayolo.y >= mechantyolo8.y-100) and (mechantyolo8.x+50 >= pizzayolo.x >= mechantyolo8.x-25):
+        game_over = True
+    if (mechantyolo9.y >= pizzayolo.y >= mechantyolo9.y-100) and (mechantyolo9.x+50 >= pizzayolo.x >= mechantyolo9.x-25):
+        game_over = True
+    if (mechantyolo10.y >= pizzayolo.y >= mechantyolo10.y-100) and (mechantyolo10.x+50 >= pizzayolo.x >= mechantyolo10.x-25):
+        game_over = True
+
+ #platform mobile verticalement
     plateforme3.y -=5
     if plateforme3.y == 0:
         plateforme3.y = 700
+    plateforme15.y -=5
+    if plateforme15.y == 0:
+        plateforme15.y = 700
 #plateform piège
     if (plateforme4.y - 10 >= pizzayolo.y >= plateforme4.y - 100) and (plateforme4.x + 280 >= pizzayolo.x >= plateforme4.x - 85):
         plateforme4.y += 40
+    if (plateforme16.y - 10 >= pizzayolo.y >= plateforme16.y - 100) and (plateforme16.x + 280 >= pizzayolo.x >= plateforme16.x - 85):
+        plateforme16.y += 40
+    if (plateforme12.y - 10 >= pizzayolo.y >= plateforme12.y - 100) and (plateforme12.x + 280 >= pizzayolo.x >= plateforme12.x - 85):
+        plateforme12.y += 40
 # Faire marcher la reine
     if (pizzareine.y-10 >= pizzayolo.y >= pizzareine.y-100) and (pizzareine.x+280 >= pizzayolo.x >= pizzareine.x-85):
         message('bravo', red)
