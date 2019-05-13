@@ -48,8 +48,6 @@ class player(object):
         self.vel = 5
         self.isJump = False
         self.jumpCount = 13
-        self.right = False
-        self.left = False
         self.walkCount = 0
         self.hitbox = (self.x + 20, self.y + 10, 60, 90)
         # variables assosciées aux caractéristiques du personnage
@@ -68,6 +66,7 @@ class player(object):
 # on choisi le nombre d'images de l'animation à mettre par pas.
         if pizzayolo.walkCount + 1 >= 25:
             pizzayolo.walkCount = 0
+        # on définit les mouvements du personnage et on appelle les images pour l'animation
 
         if pizzayolo.left:
             surface.blit(walkLeft[pizzayolo.walkCount // 5], (pizzayolo.x, pizzayolo.y))
@@ -80,27 +79,25 @@ class player(object):
             pizzayolo.walkCount = 0
         self.hitbox = (self.x + 20, self.y + 10, 60, 90)
         pygame.draw.rect(surface, white, self.hitbox, 2)
-# on définit les mouvements du personnage et on appelle les images pour l'animation
+
+#variables associées aux caractéristiques de l'ennemi
 
 class ennemie(object):
-    def __init__(self, x, y, height, width):
+    def __init__(self, x, y, height, width): #Fonction d'initialisation au sein de la classe
         self.x = x
         self.y = y
         self.height = height
         self.width = width
-        self.walkcount = 0
         self.vel = 10
         self.hitbox = (self.x + 20, self.y + 10, 60, 90)
-        pygame.draw.rect(surface, white, self.hitbox, 2)
-#variables associées aux caractéristiques de l'ennemi
 
-    def bouger (self, surface):
-        if keys[pygame.K_RIGHT]:
+    def bouger (self, surface):  # Cette fonction permet de faire bouger les ennemis lorsqu'on appuie sur les touches
+                                 # L'attribut Surface représente les plateformes
+        if keys[pygame.K_RIGHT] :
             self.x -= self.vel
         elif keys[pygame.K_LEFT]:
             self.x += self.vel
         self.hitbox = (self.x + 20, self.y + 10, 60, 90)
-        pygame.draw.rect(surface, white, self.hitbox, 2)
         surface.blit(imgmechant, (self.x, self.y))
 
 class princesse(object):
@@ -111,7 +108,6 @@ class princesse(object):
         self.width = width
         self.vel = 10
         self.hitbox = (self.x, self.y, 120, 120)
-        pygame.draw.rect(surface, white, self.hitbox, 2)
 #variables associées aux caractéristiques de l'ennemi
 
     def existe(self, surface):
@@ -121,7 +117,6 @@ class princesse(object):
             self.x += self.vel
         self.hitbox = (self.x, self.y + 10, 120, 120)
         surface.blit(imgprincesse, (self.x, self.y))
-        pygame.draw.rect(surface, white, self.hitbox, 2)
 
 
 
@@ -141,7 +136,6 @@ class platform(object):
         elif keys[pygame.K_LEFT]:
             self.x += self.vel
         self.hitbox = (self.x, self.y, 300, 10)
-        pygame.draw.rect(surface, red, self.hitbox, 2)
         surface.blit(platformimg, (self.x, self.y))
 
 #on essaye d'afficher du texte
@@ -152,7 +146,7 @@ def message(msg, color):
     pygame.display.update()
 
 
-def personnage():
+def personnage():   # Permet d'ajouter les personnages dans le jeu
     pizzayolo.mouvement(surface)
     plateforme1.existance(surface)
     plateforme2.existance(surface)
@@ -183,7 +177,7 @@ def personnage():
     pizzareine.existe(surface)
     pygame.display.update()
 
-# on ajoute le personnage au jeu
+#
 
 
 # Moteur du jeu
@@ -198,9 +192,7 @@ mechantyolo6 = ennemie(3100, 300, 32, 32)
 mechantyolo7 = ennemie(4100, 280, 32, 32)
 mechantyolo8 = ennemie(4650, 400, 32, 32)
 mechantyolo9 = ennemie(5400, 150, 32, 32)
-mechantyolo10 = ennemie(6650, 350, 32, 32)
-mechantyolo11 = ennemie(3100, 300, 32, 32)
-
+mechantyolo10 = ennemie(6750, 350, 32, 32)
 plateforme1 = platform(50, 400, 10, 300)
 plateforme2 = platform(450, 250, 10, 300)
 plateforme3 = platform(800, 500, 10, 300)
@@ -301,8 +293,7 @@ while not game_over:
         mechantyolo7 = ennemie(4100, 280, 32, 32)
         mechantyolo8 = ennemie(4650, 400, 32, 32)
         mechantyolo9 = ennemie(5400, 150, 32, 32)
-        mechantyolo10 = ennemie(6650, 350, 32, 32)
-        mechantyolo11 = ennemie(3100, 300, 32, 32)
+        mechantyolo10 = ennemie(6750, 350, 32, 32)
         plateforme1 = platform(50, 400, 10, 300)
         plateforme2 = platform(450, 250, 10, 300)
         plateforme3 = platform(800, 500, 10, 300)
