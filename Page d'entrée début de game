@@ -6,11 +6,15 @@ window = Tk()
 # personnaliser cette fenetre
 window.title("My application")
 window.geometry ("300x300")
+
+#définir une taille minimal pour la fenêtre
 window.minsize(480, 360)
 window.iconbitmap("Pizzayolo.ico")
+
+#chager la couleur de fond
 window.config(background='#F98870')
 
-#creer la frame
+#creer un cadre
 frame= Frame(window, bg='#F98870', bd=1, relief=SUNKEN)
 
 #ajouter un premier texte
