@@ -100,6 +100,11 @@ class ennemie(object):
             self.x += self.vel
         self.hitbox = (self.x + 20, self.y + 10, 60, 90)
         surface.blit(imgmechant, (self.x, self.y))
+        if (self.y >= pizzayolo.y >= self.y-100) and (self.x+50 >= pizzayolo.x >= self.x-25):
+            message('Perdu', red)
+            time.sleep(2)
+            pygame.quit()
+
 
 class princesse(object):
     def __init__(self, x, y , height, width): #Fonction d'initialisation au sein de la classe permettant de définir les caractéristiques de la princesse
@@ -118,8 +123,10 @@ class princesse(object):
             self.x += self.vel
         self.hitbox = (self.x, self.y + 10, 120, 120)
         surface.blit(imgprincesse, (self.x, self.y))
-
-
+        if (self.y-10 >= pizzayolo.y >= self.y-100) and (self.x+280 >= pizzayolo.x >= self.x-85):
+            message('bravo', red)
+            time.sleep(2)
+            pygame.quit()
 
 class plateforme(object):
     def __init__(self, x, y, height, width): #Fonction d'initialisation au sein de la classe permettant de définir les caractéristiques de la plateforme
@@ -295,6 +302,7 @@ while not game_over:
         mechantyolo8 = ennemie(4650, 400, 32, 32)
         mechantyolo9 = ennemie(5400, 150, 32, 32)
         mechantyolo10 = ennemie(6750, 350, 32, 32)
+        plateforme1 = plateforme(50, 400, 10, 300)
         plateforme2 = plateforme(450, 250, 10, 300)
         plateforme3 = plateforme(800, 500, 10, 300)
         plateforme4 = plateforme(1300, 400, 10, 300)
@@ -311,29 +319,8 @@ while not game_over:
         plateforme15 = plateforme(5800, 500, 10, 300)
         plateforme16 = plateforme(6600, 450, 10, 300)
         pizzareine = princesse(7000, 400, 32, 32)
-    #on fait marcher les hitbox ennemies
-    if (mechantyolo1.y >= pizzayolo.y >= mechantyolo1.y-100) and (mechantyolo1.x+50 >= pizzayolo.x >= mechantyolo1.x-25):
-        game_over = True
-    if (mechantyolo2.y >= pizzayolo.y >= mechantyolo2.y-100) and (mechantyolo2.x+50 >= pizzayolo.x >= mechantyolo2.x-25):
-        game_over = True
-    if (mechantyolo3.y >= pizzayolo.y >= mechantyolo3.y-100) and (mechantyolo3.x+50 >= pizzayolo.x >= mechantyolo3.x-25):
-        game_over = True
-    if (mechantyolo4.y >= pizzayolo.y >= mechantyolo4.y-100) and (mechantyolo4.x+50 >= pizzayolo.x >= mechantyolo4.x-25):
-        game_over = True
-    if (mechantyolo5.y >= pizzayolo.y >= mechantyolo5.y-100) and (mechantyolo5.x+50 >= pizzayolo.x >= mechantyolo5.x-25):
-        game_over = True
-    if (mechantyolo6.y >= pizzayolo.y >= mechantyolo6.y-100) and (mechantyolo6.x+50 >= pizzayolo.x >= mechantyolo6.x-25):
-        game_over = True
-    if (mechantyolo7.y >= pizzayolo.y >= mechantyolo7.y-100) and (mechantyolo7.x+50 >= pizzayolo.x >= mechantyolo7.x-25):
-        game_over = True
-    if (mechantyolo8.y >= pizzayolo.y >= mechantyolo8.y-100) and (mechantyolo8.x+50 >= pizzayolo.x >= mechantyolo8.x-25):
-        game_over = True
-    if (mechantyolo9.y >= pizzayolo.y >= mechantyolo9.y-100) and (mechantyolo9.x+50 >= pizzayolo.x >= mechantyolo9.x-25):
-        game_over = True
-    if (mechantyolo10.y >= pizzayolo.y >= mechantyolo10.y-100) and (mechantyolo10.x+50 >= pizzayolo.x >= mechantyolo10.x-25):
-        game_over = True
 
- #platform mobile verticalement
+    #platform mobile verticalement
     plateforme3.y -=5
     if plateforme3.y == 0:
         plateforme3.y = 700
@@ -348,10 +335,7 @@ while not game_over:
     if (plateforme12.y - 10 >= pizzayolo.y >= plateforme12.y - 100) and (plateforme12.x + 280 >= pizzayolo.x >= plateforme12.x - 85):
         plateforme12.y += 40
 # Faire marcher la reine
-    if (pizzareine.y-10 >= pizzayolo.y >= pizzareine.y-100) and (pizzareine.x+280 >= pizzayolo.x >= pizzareine.x-85):
-        message('bravo', red)
-        time.sleep(1)
-        game_over = True
+
 # faire marcher le saut sur la tête des ennemies
 
 
