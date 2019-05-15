@@ -40,7 +40,8 @@ pygame.display.set_caption("JEU bastien Antoine Briac")
 
 # on rassemble toutes les variables associées aux caractèristiques du personnage
 class player(object):
-    def __init__(self, x, y, width, height):
+    def __init__(self, x, y, width, height):  #Fonction d'initialisation au sein de la classe permettant de définir les caractéristiques du personnage
+                                              # Les attributs "x" "y" "width" et "height" représentent la position du personnage ainsi que ses dimensions
         self.x = x
         self.y = y
         self.height = height
@@ -83,7 +84,7 @@ class player(object):
 #variables associées aux caractéristiques de l'ennemi
 
 class ennemie(object):
-    def __init__(self, x, y, height, width): #Fonction d'initialisation au sein de la classe
+    def __init__(self, x, y, height, width): #Fonction d'initialisation au sein de la classe permettant de définir les caractéristiques des ennemis
         self.x = x
         self.y = y
         self.height = height
@@ -91,8 +92,8 @@ class ennemie(object):
         self.vel = 10
         self.hitbox = (self.x + 20, self.y + 10, 60, 90)
 
-    def bouger (self, surface):  # Cette fonction permet de faire bouger les ennemis lorsqu'on appuie sur les touches
-                                 # L'attribut Surface représente les plateformes
+    def Mouvementdesennemis (self, surface):  # Cette fonction permet de faire bouger les ennemis lorsqu'on appuie sur les touches
+                                              # L'attribut Surface représente les plateformes
         if keys[pygame.K_RIGHT] :
             self.x -= self.vel
         elif keys[pygame.K_LEFT]:
@@ -101,7 +102,7 @@ class ennemie(object):
         surface.blit(imgmechant, (self.x, self.y))
 
 class princesse(object):
-    def __init__(self, x, y , height, width):
+    def __init__(self, x, y , height, width): #Fonction d'initialisation au sein de la classe permettant de définir les caractéristiques de la princesse
         self.x = x
         self.y = y
         self.height = height
@@ -120,8 +121,8 @@ class princesse(object):
 
 
 
-class platform(object):
-    def __init__(self, x, y, height, width):
+class plateforme(object):
+    def __init__(self, x, y, height, width): #Fonction d'initialisation au sein de la classe permettant de définir les caractéristiques de la plateforme
         self.x = x
         self.y = y
         self.height = height
@@ -129,8 +130,8 @@ class platform(object):
         self.vel = 10
         self.hitbox = (self.x, self.y, 300, 10)
 
-    def existance(self, surface):
-# permet de faire bouger le personnage et l'empèche de sortir de l'écran
+    def Mouvementplateforme(self, surface):# Cette fonction permet de faire bouger les plateformes lorsqu'on appuie sur les touches
+                                 # L'attribut Surface représente les plateformes
         if keys[pygame.K_RIGHT]:
             self.x -= self.vel
         elif keys[pygame.K_LEFT]:
@@ -148,32 +149,32 @@ def message(msg, color):
 
 def personnage():   # Permet d'ajouter les personnages dans le jeu
     pizzayolo.mouvement(surface)
-    plateforme1.existance(surface)
-    plateforme2.existance(surface)
-    plateforme3.existance(surface)
-    plateforme4.existance(surface)
-    plateforme5.existance(surface)
-    plateforme6.existance(surface)
-    plateforme7.existance(surface)
-    plateforme8.existance(surface)
-    plateforme9.existance(surface)
-    plateforme10.existance(surface)
-    plateforme11.existance(surface)
-    plateforme12.existance(surface)
-    plateforme13.existance(surface)
-    plateforme14.existance(surface)
-    plateforme15.existance(surface)
-    plateforme16.existance(surface)
-    mechantyolo1.bouger(surface)
-    mechantyolo2.bouger(surface)
-    mechantyolo3.bouger(surface)
-    mechantyolo4.bouger(surface)
-    mechantyolo5.bouger(surface)
-    mechantyolo6.bouger(surface)
-    mechantyolo7.bouger(surface)
-    mechantyolo8.bouger(surface)
-    mechantyolo9.bouger(surface)
-    mechantyolo10.bouger(surface)
+    plateforme1.Mouvementplateforme(surface)
+    plateforme2.Mouvementplateforme(surface)
+    plateforme3.Mouvementplateforme(surface)
+    plateforme4.Mouvementplateforme(surface)
+    plateforme5.Mouvementplateforme(surface)
+    plateforme6.Mouvementplateforme(surface)
+    plateforme7.Mouvementplateforme(surface)
+    plateforme8.Mouvementplateforme(surface)
+    plateforme9.Mouvementplateforme(surface)
+    plateforme10.Mouvementplateforme(surface)
+    plateforme11.Mouvementplateforme(surface)
+    plateforme12.Mouvementplateforme(surface)
+    plateforme13.Mouvementplateforme(surface)
+    plateforme14.Mouvementplateforme(surface)
+    plateforme15.Mouvementplateforme(surface)
+    plateforme16.Mouvementplateforme(surface)
+    mechantyolo1.Mouvementdesennemis(surface)
+    mechantyolo2.Mouvementdesennemis(surface)
+    mechantyolo3.Mouvementdesennemis(surface)
+    mechantyolo4.Mouvementdesennemis(surface)
+    mechantyolo5.Mouvementdesennemis(surface)
+    mechantyolo6.Mouvementdesennemis(surface)
+    mechantyolo7.Mouvementdesennemis(surface)
+    mechantyolo8.Mouvementdesennemis(surface)
+    mechantyolo9.Mouvementdesennemis(surface)
+    mechantyolo10.Mouvementdesennemis(surface)
     pizzareine.existe(surface)
     pygame.display.update()
 
@@ -193,22 +194,22 @@ mechantyolo7 = ennemie(4100, 280, 32, 32)
 mechantyolo8 = ennemie(4650, 400, 32, 32)
 mechantyolo9 = ennemie(5400, 150, 32, 32)
 mechantyolo10 = ennemie(6750, 350, 32, 32)
-plateforme1 = platform(50, 400, 10, 300)
-plateforme2 = platform(450, 250, 10, 300)
-plateforme3 = platform(800, 500, 10, 300)
-plateforme4 = platform(1300, 400, 10, 300)
-plateforme5 = platform(1500, 500, 10, 300)
-plateforme6 = platform(1700, 300, 10, 300)
-plateforme7 = platform(2000, 300, 10, 300)
-plateforme8 = platform(2400, 100, 10, 300)
-plateforme9 = platform(3000, 400, 10, 300)
-plateforme10 = platform(3550, 530, 10, 300)
-plateforme11 = platform(4050, 380, 10, 300)
-plateforme12 = platform(4550, 500, 10, 300)
-plateforme13 = platform(4750, 300, 10, 300)
-plateforme14 = platform(5300, 240, 10, 300)
-plateforme15 = platform(5800, 500, 10, 300)
-plateforme16 = platform(6600, 450, 10, 300)
+plateforme1 = plateforme(50, 400, 10, 300)
+plateforme2 = plateforme(450, 250, 10, 300)
+plateforme3 = plateforme(800, 500, 10, 300)
+plateforme4 = plateforme(1300, 400, 10, 300)
+plateforme5 = plateforme(1500, 500, 10, 300)
+plateforme6 = plateforme(1700, 300, 10, 300)
+plateforme7 = plateforme(2000, 300, 10, 300)
+plateforme8 = plateforme(2400, 100, 10, 300)
+plateforme9 = plateforme(3000, 400, 10, 300)
+plateforme10 = plateforme(3550, 530, 10, 300)
+plateforme11 = plateforme(4050, 380, 10, 300)
+plateforme12 = plateforme(4550, 500, 10, 300)
+plateforme13 = plateforme(4750, 300, 10, 300)
+plateforme14 = plateforme(5300, 240, 10, 300)
+plateforme15 = plateforme(5800, 500, 10, 300)
+plateforme16 = plateforme(6600, 450, 10, 300)
 pizzareine = princesse(7000, 400, 32, 32)
 
 
@@ -282,7 +283,7 @@ while not game_over:
 
     if pizzayolo.y >= 700:
         message('Perdu', red)
-        time.sleep(2)
+        time.sleep(1)
         pizzayolo = player(150, 200, 32, 32)
         mechantyolo1 = ennemie(80, 300, 32, 32)
         mechantyolo2 = ennemie(500, 150, 32, 32)
@@ -294,22 +295,21 @@ while not game_over:
         mechantyolo8 = ennemie(4650, 400, 32, 32)
         mechantyolo9 = ennemie(5400, 150, 32, 32)
         mechantyolo10 = ennemie(6750, 350, 32, 32)
-        plateforme1 = platform(50, 400, 10, 300)
-        plateforme2 = platform(450, 250, 10, 300)
-        plateforme3 = platform(800, 500, 10, 300)
-        plateforme4 = platform(1300, 400, 10, 300)
-        plateforme5 = platform(1500, 500, 10, 300)
-        plateforme6 = platform(1700, 300, 10, 300)
-        plateforme7 = platform(2000, 300, 10, 300)
-        plateforme8 = platform(2400, 100, 10, 300)
-        plateforme9 = platform(3000, 400, 10, 300)
-        plateforme10 = platform(3550, 530, 10, 300)
-        plateforme11 = platform(4050, 380, 10, 300)
-        plateforme12 = platform(4550, 500, 10, 300)
-        plateforme13 = platform(4750, 300, 10, 300)
-        plateforme14 = platform(5300, 240, 10, 300)
-        plateforme15 = platform(5800, 500, 10, 300)
-        plateforme16 = platform(6600, 450, 10, 300)
+        plateforme2 = plateforme(450, 250, 10, 300)
+        plateforme3 = plateforme(800, 500, 10, 300)
+        plateforme4 = plateforme(1300, 400, 10, 300)
+        plateforme5 = plateforme(1500, 500, 10, 300)
+        plateforme6 = plateforme(1700, 300, 10, 300)
+        plateforme7 = plateforme(2000, 300, 10, 300)
+        plateforme8 = plateforme(2400, 100, 10, 300)
+        plateforme9 = plateforme(3000, 400, 10, 300)
+        plateforme10 = plateforme(3550, 530, 10, 300)
+        plateforme11 = plateforme(4050, 380, 10, 300)
+        plateforme12 = plateforme(4550, 500, 10, 300)
+        plateforme13 = plateforme(4750, 300, 10, 300)
+        plateforme14 = plateforme(5300, 240, 10, 300)
+        plateforme15 = plateforme(5800, 500, 10, 300)
+        plateforme16 = plateforme(6600, 450, 10, 300)
         pizzareine = princesse(7000, 400, 32, 32)
     #on fait marcher les hitbox ennemies
     if (mechantyolo1.y >= pizzayolo.y >= mechantyolo1.y-100) and (mechantyolo1.x+50 >= pizzayolo.x >= mechantyolo1.x-25):
@@ -350,7 +350,7 @@ while not game_over:
 # Faire marcher la reine
     if (pizzareine.y-10 >= pizzayolo.y >= pizzareine.y-100) and (pizzareine.x+280 >= pizzayolo.x >= pizzareine.x-85):
         message('bravo', red)
-        time.sleep(2)
+        time.sleep(1)
         game_over = True
 # faire marcher le saut sur la tête des ennemies
 
@@ -358,6 +358,6 @@ while not game_over:
     surface.fill(blue)
     personnage()
 message('Merci', red)
-time.sleep(2)
+time.sleep(1)
 pygame.quit()
 quit()
