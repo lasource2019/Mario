@@ -125,7 +125,7 @@ class princesse(object):
         surface.blit(imgprincesse, (self.x, self.y))
         if (self.y-10 >= pizzayolo.y >= self.y-100) and (self.x+280 >= pizzayolo.x >= self.x-85):
             message('bravo', red)
-            time.sleep(2)
+            time.sleep(1)
             pygame.quit()
 
 class plateforme(object):
