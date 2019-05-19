@@ -283,8 +283,8 @@ while not game_over:
 
     if pizzaiolo.y >= 700:  # Permet de faire apparaitre le personnage à sa position initiale après une chute
         message('Perdu', red)
-        time.sleep(2)
-        pizzayolo = player(150, 200, 32, 32)
+        time.sleep(1)
+        pizzaiolo = player(150, 200, 32, 32)
         mechantyolo1 = ennemie(80, 300, 32, 32)
         mechantyolo2 = ennemie(500, 150, 32, 32)
         mechantyolo3 = ennemie(1350, 300, 32, 32)
