@@ -13,29 +13,29 @@ walkLeft = [pygame.image.load('Pizzayolo.png'), pygame.image.load('Walkingyolo1.
             pygame.image.load('Walkingyolo4.png')]
 # images pour l'animation de marche à gauche
 
+# image du personnage à l'arrêt
 img = pygame.image.load('Pizzayolo.png')
 imgmechant = pygame.image.load('Mechantyolo.png')
 imgprincesse = pygame.image.load('Princesse.png')
-# image du personnage à l'arrêt
+
 blue = (113, 177, 227)
-white = (255, 255, 255)
 red = (227, 10, 150)
 
-clock = pygame.time.Clock()
 # variable permettant de changer le temps
+clock = pygame.time.Clock()
 
 pygame.init()
-
 font = pygame.font.Font(None, 100)
 
+# on definit la longeur et largeur de la fenêtre
 surfaceW = 1275
 surfaceH = 600
-# on definit la longeur et largeur de la fenêtre
 
+# Permet d'afficher la fenêtre
 surface = pygame.display.set_mode((surfaceW, surfaceH))
-# on creer une fenêtre
 
 pygame.display.set_caption("JEU bastien Antoine Briac")
+
 
 # on rassemble toutes les variables associées aux caractèristiques du personnage
 class player(object):
@@ -47,12 +47,11 @@ class player(object):
         self.width = width
         self.vel = 5
         self.isJump = False
-        self.jumpCount = 13
+        self.jumpCount = 13      # Définit la hauteur du saut
         self.walkCount = 0
         self.hitbox = (self.x + 20, self.y + 10, 60, 90)
-        # variables assosciées aux caractéristiques du personnage
 
-    def mouvement(self, surface):   # L'attribut Surface représente permet d'appliquer la fonction dans la fenêtre
+    def mouvement(self, surface):   # L'attribut Surface permet d'appliquer la fonction dans la fenêtre
         if keys [pygame.K_RIGHT]:
             self.left = True
             self.right = False
@@ -64,19 +63,19 @@ class player(object):
             self.left = False
             self.walkCount = 0
 # on choisi le nombre d'images de l'animation à mettre par pas.
-        if pizzayolo.walkCount + 1 >= 25:
-            pizzayolo.walkCount = 0
+        if pizzaiolo.walkCount + 1 >= 25:
+            pizzaiolo.walkCount = 0
         # on définit les mouvements du personnage et on appelle les images pour l'animation
 
-        if pizzayolo.left:
-            surface.blit(walkLeft[pizzayolo.walkCount // 5], (pizzayolo.x, pizzayolo.y))
-            pizzayolo.walkCount += 1
-        elif pizzayolo.right:
-            surface.blit(walkRight[pizzayolo.walkCount // 5], (pizzayolo.x, pizzayolo.y))
-            pizzayolo.walkCount += 1
+        if pizzaiolo.left:
+            surface.blit(walkLeft[pizzaiolo.walkCount // 5], (pizzaiolo.x, pizzaiolo.y))
+            pizzaiolo.walkCount += 1
+        elif pizzaiolo.right:
+            surface.blit(walkRight[pizzaiolo.walkCount // 5], (pizzaiolo.x, pizzaiolo.y))
+            pizzaiolo.walkCount += 1
         else:
-            surface.blit(img, (pizzayolo.x, pizzayolo.y))
-            pizzayolo.walkCount = 0
+            surface.blit(img, (pizzaiolo.x, pizzaiolo.y))
+            pizzaiolo.walkCount = 0
         self.hitbox = (self.x + 20, self.y + 10, 60, 90)
 
 #variables associées aux caractéristiques de l'ennemi
@@ -98,7 +97,7 @@ class ennemie(object):
             self.x += self.vel
         self.hitbox = (self.x + 20, self.y + 10, 60, 90)
         surface.blit(imgmechant, (self.x, self.y))
-        if (self.y >= pizzayolo.y >= self.y-100) and (self.x+50 >= pizzayolo.x >= self.x-25):
+        if (self.y >= pizzaiolo.y >= self.y-100) and (self.x+50 >= pizzaiolo.x >= self.x-25):
             message('Perdu', red)
             time.sleep(2)
             pygame.quit()
@@ -121,7 +120,7 @@ class princesse(object):
             self.x += self.vel
         self.hitbox = (self.x, self.y + 10, 120, 120)
         surface.blit(imgprincesse, (self.x, self.y))
-        if (self.y-10 >= pizzayolo.y >= self.y-100) and (self.x+280 >= pizzayolo.x >= self.x-85):
+        if (self.y-10 >= pizzaiolo.y >= self.y-100) and (self.x+280 >= pizzaiolo.x >= self.x-85):
             message('bravo', red)
             time.sleep(2)
             pygame.quit()
@@ -153,7 +152,7 @@ def message(msg, color):
 
 
 def personnage():   # Permet d'ajouter les personnages dans le jeu
-    pizzayolo.mouvement(surface)
+    pizzaiolo.mouvement(surface)
     plateforme1.Mouvementplateforme(surface)
     plateforme2.Mouvementplateforme(surface)
     plateforme3.Mouvementplateforme(surface)
@@ -185,7 +184,7 @@ def personnage():   # Permet d'ajouter les personnages dans le jeu
 
 # Moteur du jeu
 game_over = False
-pizzayolo = player(150, 200, 32, 32)
+pizzaiolo = player(150, 200, 32, 32)
 mechantyolo1 = ennemie(80, 300, 32, 32)
 mechantyolo2 = ennemie(500, 150, 32, 32)
 mechantyolo3 = ennemie(1350, 300, 32, 32)
@@ -223,66 +222,66 @@ while not game_over:
 
 # Definir la gravité
     gravity = 10
-    pizzayolo.y += gravity
+    pizzaiolo.y += gravity
 # permet de prendre en compte l'utilisation des touches sur le clavier
     keys = pygame.key.get_pressed()
 
-    if not (pizzayolo.isJump):
+    if not (pizzaiolo.isJump):
 
 # permet au personnage de sauter
 
         if keys[pygame.K_SPACE]:
-            pizzayolo.isJump = True
-            pizzayolo.right = True
-            pizzayolo.left = True
-            pizzayolo.walkCount = True
+            pizzaiolo.isJump = True
+            pizzaiolo.right = True
+            pizzaiolo.left = True
+            pizzaiolo.walkCount = True
     else:
-        if pizzayolo.jumpCount >= -12:
+        if pizzaiolo.jumpCount >= -12:
             neg = 1
-            if pizzayolo.jumpCount < 0:
+            if pizzaiolo.jumpCount < 0:
                 neg = -1
-            pizzayolo.y -= (pizzayolo.jumpCount ** 2) * 0.5 * neg
-            pizzayolo.jumpCount -= 1
+            pizzaiolo.y -= (pizzaiolo.jumpCount ** 2) * 0.5 * neg
+            pizzaiolo.jumpCount -= 1
         else:
-            pizzayolo.isJump = False
-            pizzayolo.jumpCount = 13
+            pizzaiolo.isJump = False
+            pizzaiolo.jumpCount = 13
 
 
-#on va essyer de faire fonctionner les hitbox ok
-    if (plateforme1.y-10 >= pizzayolo.y >= plateforme1.y-100) and (plateforme1.x+280 >= pizzayolo.x >= plateforme1.x-85):
-        pizzayolo.y = plateforme1.y-100
-    if (plateforme2.y-10 > pizzayolo.y > plateforme2.y-100) and (plateforme2.x+280 >= pizzayolo.x >= plateforme2.x-85):
-        pizzayolo.y = plateforme2.y-100
-    if (plateforme3.y-10 > pizzayolo.y > plateforme3.y-100) and (plateforme3.x+280 >= pizzayolo.x >= plateforme3.x-85):
-        pizzayolo.y = plateforme3.y-100
-    if (plateforme4.y-10 >= pizzayolo.y >= plateforme4.y-100) and (plateforme4.x+280 >= pizzayolo.x >= plateforme4.x-85):
-        pizzayolo.y = plateforme4.y-100
-    if (plateforme5.y-10 >= pizzayolo.y >= plateforme5.y-100) and (plateforme5.x+280 >= pizzayolo.x >= plateforme5.x-85):
-        pizzayolo.y = plateforme5.y-100
-    if (plateforme6.y-10 > pizzayolo.y > plateforme6.y-100) and (plateforme6.x+280 >= pizzayolo.x >= plateforme6.x-85):
-        pizzayolo.y = plateforme6.y-100
-    if (plateforme7.y-10 > pizzayolo.y > plateforme7.y-100) and (plateforme7.x+280 >= pizzayolo.x >= plateforme7.x-85):
-        pizzayolo.y = plateforme7.y-100
-    if (plateforme8.y-10 >= pizzayolo.y >= plateforme8.y-100) and (plateforme8.x+280 >= pizzayolo.x >= plateforme8.x-85):
-        pizzayolo.y = plateforme8.y-100
-    if (plateforme9.y-10 >= pizzayolo.y >= plateforme9.y-100) and (plateforme9.x+280 >= pizzayolo.x >= plateforme9.x-85):
-        pizzayolo.y = plateforme9.y-100
-    if (plateforme10.y-10 >= pizzayolo.y >= plateforme10.y-100) and (plateforme10.x+280 >= pizzayolo.x >= plateforme10.x-85):
-        pizzayolo.y = plateforme10.y-100
-    if (plateforme11.y-10 >= pizzayolo.y >= plateforme11.y-100) and (plateforme11.x+280 >= pizzayolo.x >= plateforme11.x-85):
-        pizzayolo.y = plateforme11.y-100
-    if (plateforme12.y-10 >= pizzayolo.y >= plateforme12.y-100) and (plateforme12.x+280 >= pizzayolo.x >= plateforme12.x-85):
-        pizzayolo.y = plateforme12.y-100
-    if (plateforme13.y-10 >= pizzayolo.y >= plateforme13.y-100) and (plateforme13.x+280 >= pizzayolo.x >= plateforme13.x-85):
-        pizzayolo.y = plateforme13.y-100
-    if (plateforme14.y-10 >= pizzayolo.y >= plateforme14.y-100) and (plateforme14.x+280 >= pizzayolo.x >= plateforme14.x-85):
-        pizzayolo.y = plateforme14.y-100
-    if (plateforme15.y-10 >= pizzayolo.y >= plateforme15.y-100) and (plateforme15.x+280 >= pizzayolo.x >= plateforme15.x-85):
-        pizzayolo.y = plateforme15.y-100
-    if (plateforme16.y-10 >= pizzayolo.y >= plateforme16.y-100) and (plateforme16.x+280 >= pizzayolo.x >= plateforme16.x-85):
-        pizzayolo.y = plateforme16.y-100
+# Permet de définir la hitbox de chaque plateforme
+    if (plateforme1.y-10 >= pizzaiolo.y >= plateforme1.y-100) and (plateforme1.x+280 >= pizzaiolo.x >= plateforme1.x-85):
+        pizzaiolo.y = plateforme1.y-100
+    if (plateforme2.y-10 > pizzaiolo.y > plateforme2.y-100) and (plateforme2.x+280 >= pizzaiolo.x >= plateforme2.x-85):
+        pizzaiolo.y = plateforme2.y-100
+    if (plateforme3.y-10 > pizzaiolo.y > plateforme3.y-100) and (plateforme3.x+280 >= pizzaiolo.x >= plateforme3.x-85):
+        pizzaiolo.y = plateforme3.y-100
+    if (plateforme4.y-10 >= pizzaiolo.y >= plateforme4.y-100) and (plateforme4.x+280 >= pizzaiolo.x >= plateforme4.x-85):
+        pizzaiolo.y = plateforme4.y-100
+    if (plateforme5.y-10 >= pizzaiolo.y >= plateforme5.y-100) and (plateforme5.x+280 >= pizzaiolo.x >= plateforme5.x-85):
+        pizzaiolo.y = plateforme5.y-100
+    if (plateforme6.y-10 > pizzaiolo.y > plateforme6.y-100) and (plateforme6.x+280 >= pizzaiolo.x >= plateforme6.x-85):
+        pizzaiolo.y = plateforme6.y-100
+    if (plateforme7.y-10 > pizzaiolo.y > plateforme7.y-100) and (plateforme7.x+280 >= pizzaiolo.x >= plateforme7.x-85):
+        pizzaiolo.y = plateforme7.y-100
+    if (plateforme8.y-10 >= pizzaiolo.y >= plateforme8.y-100) and (plateforme8.x+280 >= pizzaiolo.x >= plateforme8.x-85):
+        pizzaiolo.y = plateforme8.y-100
+    if (plateforme9.y-10 >= pizzaiolo.y >= plateforme9.y-100) and (plateforme9.x+280 >= pizzaiolo.x >= plateforme9.x-85):
+        pizzaiolo.y = plateforme9.y-100
+    if (plateforme10.y-10 >= pizzaiolo.y >= plateforme10.y-100) and (plateforme10.x+280 >= pizzaiolo.x >= plateforme10.x-85):
+        pizzaiolo.y = plateforme10.y-100
+    if (plateforme11.y-10 >= pizzaiolo.y >= plateforme11.y-100) and (plateforme11.x+280 >= pizzaiolo.x >= plateforme11.x-85):
+        pizzaiolo.y = plateforme11.y-100
+    if (plateforme12.y-10 >= pizzaiolo.y >= plateforme12.y-100) and (plateforme12.x+280 >= pizzaiolo.x >= plateforme12.x-85):
+        pizzaiolo.y = plateforme12.y-100
+    if (plateforme13.y-10 >= pizzaiolo.y >= plateforme13.y-100) and (plateforme13.x+280 >= pizzaiolo.x >= plateforme13.x-85):
+        pizzaiolo.y = plateforme13.y-100
+    if (plateforme14.y-10 >= pizzaiolo.y >= plateforme14.y-100) and (plateforme14.x+280 >= pizzaiolo.x >= plateforme14.x-85):
+        pizzaiolo.y = plateforme14.y-100
+    if (plateforme15.y-10 >= pizzaiolo.y >= plateforme15.y-100) and (plateforme15.x+280 >= pizzaiolo.x >= plateforme15.x-85):
+        pizzaiolo.y = plateforme15.y-100
+    if (plateforme16.y-10 >= pizzaiolo.y >= plateforme16.y-100) and (plateforme16.x+280 >= pizzaiolo.x >= plateforme16.x-85):
+        pizzaiolo.y = plateforme16.y-100
 
-    if pizzayolo.y >= 700:
+    if pizzaiolo.y >= 700:  # Permet de faire apparaitre le personnage à sa position initiale après une chute
         message('Perdu', red)
         time.sleep(2)
         pizzayolo = player(150, 200, 32, 32)
@@ -314,22 +313,21 @@ while not game_over:
         plateforme16 = plateforme(6600, 450, 10, 300)
         pizzareine = princesse(7000, 400, 32, 32)
 
-    #platform mobile verticalement
+    # Permet de faire bouger les plateformes verticalement
     plateforme3.y -=5
     if plateforme3.y == 0:
         plateforme3.y = 700
     plateforme15.y -=5
     if plateforme15.y == 0:
         plateforme15.y = 700
-#plateform piège
-    if (plateforme4.y - 10 >= pizzayolo.y >= plateforme4.y - 100) and (plateforme4.x + 280 >= pizzayolo.x >= plateforme4.x - 85):
-        plateforme4.y += 40
-    if (plateforme16.y - 10 >= pizzayolo.y >= plateforme16.y - 100) and (plateforme16.x + 280 >= pizzayolo.x >= plateforme16.x - 85):
-        plateforme16.y += 40
-    if (plateforme12.y - 10 >= pizzayolo.y >= plateforme12.y - 100) and (plateforme12.x + 280 >= pizzayolo.x >= plateforme12.x - 85):
-        plateforme12.y += 40
-# Faire marcher la reine
 
+# Permet de créer une plateforme piège qui tombe lorsqu'on marche dessus
+    if (plateforme4.y - 10 >= pizzaiolo.y >= plateforme4.y - 100) and (plateforme4.x + 280 >= pizzaiolo.x >= plateforme4.x - 85):
+        plateforme4.y += 40
+    if (plateforme16.y - 10 >= pizzaiolo.y >= plateforme16.y - 100) and (plateforme16.x + 280 >= pizzaiolo.x >= plateforme16.x - 85):
+        plateforme16.y += 40
+    if (plateforme12.y - 10 >= pizzaiolo.y >= plateforme12.y - 100) and (plateforme12.x + 280 >= pizzaiolo.x >= plateforme12.x - 85):
+        plateforme12.y += 40
 
     surface.blit(background , (0,0))
     personnage()
