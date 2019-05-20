@@ -17,8 +17,7 @@ img = pygame.image.load('Pizzayolo.png')
 imgmechant = pygame.image.load('Mechantyolo.png')
 imgprincesse = pygame.image.load('Princesse.png')
 
-blue = (113, 177, 227)
-red = (227, 10, 150)
+blue = (113, 177, 227)red = (227, 10, 150)
 
 # variable permettant de changer le temps
 clock = pygame.time.Clock()
@@ -50,9 +49,10 @@ class player(object):
         self.hitbox = (self.x + 20, self.y + 10, 60, 90)
 
     def mouvement(self, surface):   # L'attribut Surface permet d'appliquer la fonction dans la fenêtre
+    #on prends en compte les touches que le joueur presse
         if keys [pygame.K_RIGHT]:
-            self.left = True
             self.right = False
+            self.left = True
         elif keys[pygame.K_LEFT]:
             self.right = True
             self.left = False
@@ -66,7 +66,7 @@ class player(object):
         # on définit les mouvements du personnage et on appelle les images pour l'animation
 
         if pizzaiolo.left:
-            surface.blit(walkLeft[pizzaiolo.walkCount // 5], (pizzaiolo.x, pizzaiolo.y))
+            surface.blit(walkLeft[pizzaiolo.walkCount // 5], (pizzaiolo.x, pizzaiolo.y)) #on divise le nombre d'image par pas par 5 pour ralentir l'animation
             pizzaiolo.walkCount += 1
         elif pizzaiolo.right:
             surface.blit(walkRight[pizzaiolo.walkCount // 5], (pizzaiolo.x, pizzaiolo.y))
@@ -229,16 +229,17 @@ while not game_over:
 
 # permet au personnage de sauter
         if keys[pygame.K_SPACE]:
+        #on prends en compte si le joueur appuie sur la barre espace ou non
             pizzaiolo.isJump = True
             pizzaiolo.right = True
             pizzaiolo.left = True
             pizzaiolo.walkCount = True
     else:
         if pizzaiolo.jumpCount >= -12:
-            neg = 1
+            neg = 1 #neg (pour negative) définie le signe de la formule en dessous
             if pizzaiolo.jumpCount < 0:
-                neg = -1
-            pizzaiolo.y -= (pizzaiolo.jumpCount ** 2) * 0.5 * neg
+                neg = -1 
+            pizzaiolo.y -= (pizzaiolo.jumpCount ** 2) * 0.5 * neg #on utilise la formule de l'énergie cinétique pour rendre le saut fluide
             pizzaiolo.jumpCount -= 1
         else:
             pizzaiolo.isJump = False
