@@ -3,17 +3,16 @@ import time
 
 background = pygame.image.load("Background2.jpg")
 platformimg = pygame.image.load('platform.png')
-# on importe les images pour notre peronnages principal
+# images pour l'animation de marche à droite
 walkRight = [pygame.image.load('Reverseyolo.png'), pygame.image.load('Ralkingyolo1.png'),
              pygame.image.load('Ralkingyolo2.png'), pygame.image.load('Ralkingyolo3.png'),
              pygame.image.load('Ralkingyolo4.png')]
-# images pour l'animation de marche à droite
+# images pour l'animation de marche à gauche
 walkLeft = [pygame.image.load('Pizzayolo.png'), pygame.image.load('Walkingyolo1.png'),
             pygame.image.load('Walkingyolo2.png'), pygame.image.load('Walkingyolo3.png'),
             pygame.image.load('Walkingyolo4.png')]
-# images pour l'animation de marche à gauche
 
-# image du personnage à l'arrêt
+# image des personnages à l'arrêt, à asvoir l'ennemi et la pizza
 img = pygame.image.load('Pizzayolo.png')
 imgmechant = pygame.image.load('Mechantyolo.png')
 imgprincesse = pygame.image.load('Princesse.png')
@@ -34,8 +33,7 @@ surfaceH = 600
 # Permet d'afficher la fenêtre
 surface = pygame.display.set_mode((surfaceW, surfaceH))
 
-pygame.display.set_caption("JEU bastien Antoine Briac")
-
+pygame.display.set_caption("Les Fabuleuses aventures du Pizzaïolo")
 
 # on rassemble toutes les variables associées aux caractèristiques du personnage
 class player(object):
@@ -79,7 +77,6 @@ class player(object):
         self.hitbox = (self.x + 20, self.y + 10, 60, 90)
 
 #variables associées aux caractéristiques de l'ennemi
-
 class ennemie(object):
     def __init__(self, x, y, height, width): #Fonction d'initialisation au sein de la classe permettant de définir les caractéristiques des ennemis
         self.x = x
@@ -113,14 +110,15 @@ class princesse(object):
         self.hitbox = (self.x, self.y, 120, 120)
 #variables associées aux caractéristiques de l'ennemi
 
-    def existe(self, surface):
+    def existe(self, surface):          # Cette fonction permet de faire bouger la pizza lorsqu'on appuie sur les touches
+                                        # L'attribut Surface représente permet d'appliquer la fonction dans la fenêtre
         if keys[pygame.K_RIGHT]:
             self.x -= self.vel
         elif keys[pygame.K_LEFT]:
             self.x += self.vel
         self.hitbox = (self.x, self.y + 10, 120, 120)
         surface.blit(imgprincesse, (self.x, self.y))
-        if (self.y-10 >= pizzaiolo.y >= self.y-100) and (self.x+280 >= pizzaiolo.x >= self.x-85):
+        if (self.y-10 >= pizzaiolo.y >= self.y-100) and (self.x+280 >= pizzaiolo.x >= self.x-85):  #permet de fermer le jeu lorsqu'on touche la pizza
             message('bravo', red)
             time.sleep(2)
             pygame.quit()
@@ -151,7 +149,7 @@ def message(msg, color):
     pygame.display.update()
 
 
-def personnage():   # Permet d'ajouter les personnages dans le jeu
+def personnage():   # Permet d'afficher les personnage dans le jeu
     pizzaiolo.mouvement(surface)
     plateforme1.Mouvementplateforme(surface)
     plateforme2.Mouvementplateforme(surface)
@@ -182,7 +180,7 @@ def personnage():   # Permet d'ajouter les personnages dans le jeu
     pizzareine.existe(surface)
     pygame.display.update()
 
-# Moteur du jeu
+# Peret de définir les coordonnées et la taille des plateformes et des ennemis
 game_over = False
 pizzaiolo = player(150, 200, 32, 32)
 mechantyolo1 = ennemie(80, 300, 32, 32)
@@ -223,13 +221,13 @@ while not game_over:
 # Definir la gravité
     gravity = 10
     pizzaiolo.y += gravity
+
 # permet de prendre en compte l'utilisation des touches sur le clavier
     keys = pygame.key.get_pressed()
 
     if not (pizzaiolo.isJump):
 
 # permet au personnage de sauter
-
         if keys[pygame.K_SPACE]:
             pizzaiolo.isJump = True
             pizzaiolo.right = True
@@ -329,7 +327,7 @@ while not game_over:
     if (plateforme12.y - 10 >= pizzaiolo.y >= plateforme12.y - 100) and (plateforme12.x + 280 >= pizzaiolo.x >= plateforme12.x - 85):
         plateforme12.y += 40
 
-    surface.blit(background , (0,0))
+    surface.blit(background , (0,0))    # Permet d'afficher u fond d'écran
     personnage()
 message('Merci', red)
 time.sleep(1)
