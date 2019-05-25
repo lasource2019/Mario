@@ -17,7 +17,8 @@ img = pygame.image.load('Pizzayolo.png')
 imgmechant = pygame.image.load('Mechantyolo.png')
 imgprincesse = pygame.image.load('Princesse.png')
 
-blue = (113, 177, 227)red = (227, 10, 150)
+blue = (113, 177, 227)
+red = (227, 10, 150)
 
 # variable permettant de changer le temps
 clock = pygame.time.Clock()
